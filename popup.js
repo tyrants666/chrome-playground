@@ -1,70 +1,17 @@
 // CLASS WOKSPACE -----------------------------------------------------------------
-class workspaceClass {
-  constructor(wsName){
-    this.wsName = wsName;
-  }
-  //Save -------------------------------------
-  workspace_save(){
-    let lastWsItemId = Object.keys(wsItem).pop();
-    if (lastWsItemId !== undefined) {
-      wsId <= lastWsItemId ? wsId = +lastWsItemId+1 : '';
-    }else{ 
-      wsId = 0; 
-    }
+// class workspaceClass {
+//   constructor(wsName){
+//     this.wsName = wsName;
+//   }
+//   //Save -------------------------------------
+//   workspace_save(){
 
-    workspaces[wsId] = {}
-    workspaces[wsId].workspace_name = this.wsName;
-    workspaces[wsId].workspace_color = 'red';
-    workspaces[wsId].urls = {}
-    workspaces[wsId].windowId = {}
-    for (const i in tabs) {
-      workspaces[wsId].urls[i] = {
-        title:tabs[i].title,
-        icon:tabs[i].favIconUrl,
-        url:tabs[i].url,
-        windowId:tabs[i].windowId++,
-        groupId:tabs[i].groupId
-      }
-    }
-    workspaces[wsId].windowId = workspaces[wsId].urls[0].windowId;
+//   }
+//   //Create Workspace Elem ---------------------------------------------------
+//   workspace_create_elem(ws_id, ws_name) {
 
-    localStorage_set()
-    this.workspace_create_elem(wsId, this.wsName);
-    wsId++
-  }
-
-  //Create Workspace Elem ---------------------------------------------------
-  workspace_create_elem(ws_id, ws_name) {
-    const wsWrapper = document.querySelector('.workspaces');
-    const wsTemplate = document.querySelector('#ws_template');
-    const ws = wsTemplate.content.firstElementChild.cloneNode(true)
-    ws.setAttribute('data-ws-id', ws_id);
-    ws.querySelector('.ws-name').textContent = ws_name;
-    wsWrapper.prepend(ws)
-  }
-
-  //Get Workspace Tabs ---------------------------------------------------
-  workspace_tabs_get(ws_id) {
-    let tabsArr = []
-    let storedUrls = wsItem[ws_id]['urls'];
-    for (const i of Object.keys(storedUrls)) {
-      tabsArr.push(storedUrls[i]['url']);
-    }
-    console.log(tabsArr);
-    return tabsArr;
-  }
-
-  //Group Workspace Tabs ---------------------------------------------------
-  async workspace_tabs_group(ws_name) {
-    const tabIds = tabs.map(({ id }) => id);
-    const group = await chrome.tabs.group({ tabIds });
-    await chrome.tabGroups.update(
-      group,
-      { title: ws_name }
-    );
-  }
-
-}
+//   }
+// }
 // END CLASS WOKSPACE -----------------------------------------------------------------
 // END CLASS WOKSPACE -----------------------------------------------------------------
 
@@ -73,7 +20,7 @@ class workspaceClass {
 let wsId = 0;
 let workspaces = new Object();
 localStorage_get('onload')
-const tabs = await chrome.tabs.query({ currentWindow:true });
+
 
 
 //Add Group Onclick / Enter --------------------------------------
@@ -98,30 +45,6 @@ saveBtn.addEventListener("click", async () => {
   }
 });
 
-
-
-// Workspace onclick ---------------------------------------------
-let all_ws = document.querySelectorAll('.ws')
-for (const ws of all_ws) {
-  ws.querySelector('a').onclick = async e => {
-
-    // Create Window -- with all urls
-    let ws_id = ws.getAttribute('data-ws-id');
-    let urlsArr = wsObj.workspace_tabs_get(ws_id)
-    chrome.windows.create({
-      url: urlsArr,
-      type: "normal",
-    });
-    
-    // Group Tabs
-    // let urlsArr = wsObj.workspace_tabs_get(ws_id)
-    // const wsName = 
-    // wsObj.workspace_tabs_group(wsName);
-    // const tabIds = tabs.map(({ id }) => id);
-    // const group = await chrome.tabs.group({ tabIds });
-    // await chrome.tabGroups.update(group, { title: "DOCS" });
-  }
-}
 
 // Workspace remove -----------------------------------------------
 let all_remove = document.querySelectorAll('svg.ws-remove');

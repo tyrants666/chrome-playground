@@ -4,7 +4,8 @@
   "description": "Intuitive way to start your chrome projects",
   "main": "popup.js",
   "scripts": {
-    "test": "start"
+    "build": "node-sass popup.scss popup.css",
+    "watch": "node-sass -w popup.scss popup.css"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/tyrants666/chrome-playground/issues"
   },
-  "homepage": "https://github.com/tyrants666/chrome-playground#readme"
+  "homepage": "https://github.com/tyrants666/chrome-playground#readme",
+  "dependencies": {
+    "node-sass": "^9.0.0"
+  }
 }
