@@ -1,0 +1,19 @@
+{
+  "name": "chrome-playground",
+  "version": "1.0.0",
+  "description": "Intuitive way to start your chrome projects",
+  "main": "popup.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tyrants666/chrome-playground.git"
+  },
+  "author": "Akash Yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tyrants666/chrome-playground/issues"
+  },
+  "homepage": "https://github.com/tyrants666/chrome-playground#readme"
+}
